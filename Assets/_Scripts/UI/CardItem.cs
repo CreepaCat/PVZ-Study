@@ -10,7 +10,7 @@ namespace PVZ.UI
     {
         [SerializeField] private Image progress;
         [SerializeField] private Image dark;
-        [SerializeField] private GameObject plantPrefab = null;
+        [SerializeField] public GameObject plantPrefab = null;
 
         [SerializeField] private float plantCD = 3f;
 
@@ -24,6 +24,7 @@ namespace PVZ.UI
 
         SunManager sunManager = null;
         PlantingManager plantingManager = null;
+        GameManager gameManager = null;
 
         void Start()
         {
@@ -31,10 +32,19 @@ namespace PVZ.UI
             progress.fillAmount = 0;
             sunManager = GameObject.FindObjectOfType<SunManager>();
             plantingManager = GameObject.FindObjectOfType<PlantingManager>();
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
+
+        public void Setup(GameObject prefab, float plantCD, int sunCost)
+        {
+            plantPrefab = prefab;
+            this.plantCD = plantCD;
+            this.sunCost = sunCost;
         }
 
         void Update()
         {
+            if (!gameManager.IsGameAlive) return;
             UpdateCardState();
 
             timeFromLastPlanted += Time.deltaTime;
@@ -44,6 +54,7 @@ namespace PVZ.UI
 
         private void UpdateCardState()
         {
+
             if (sunManager.GetCurrentSunNum() >= sunCost && timeFromLastPlanted >= plantCD)
             {
                 isReady = true;
@@ -70,6 +81,7 @@ namespace PVZ.UI
         //点击拿去植物
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (!gameManager.IsGameAlive) return;
             if (!isReady) return;
 
             //planting状态下不能拿取新卡牌

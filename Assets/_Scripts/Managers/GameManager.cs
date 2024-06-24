@@ -12,6 +12,7 @@ namespace PVZ.Managers
         [SerializeField] public GameObject cardUIPanel = null;
 
         public event Action OnGameStart;
+        public bool IsGameAlive => isGameAlive;
         void Start()
         {
             // cardUIPanel.SetActive(false);

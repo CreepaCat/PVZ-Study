@@ -32,6 +32,9 @@ namespace PVZ.Managers
             spawnManager = GameObject.FindObjectOfType<SpawnManager>();
             spawnManager.OnZombieClear += OnZombieClear;
 
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.OnGameStart += SpawnZombieFromTable;
+
         }
 
         void ReadTable()
@@ -49,9 +52,9 @@ namespace PVZ.Managers
 
             Debug.Log("关卡配置表读取完毕");
             // yield return new WaitForSeconds(1);
-            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
-            gameManager.GameStart();
-            SpawnZombieFromTable();
+            //  GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            //   gameManager.GameStart();
+            //  SpawnZombieFromTable();
 
         }
 

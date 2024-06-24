@@ -31,7 +31,7 @@ namespace PVZ.UI
 
             // currentWaveZombieSpawned = levelManager.currentWaveZombieTotalNum;
 
-            currentWaveZombieTotal = levelManager.currentWaveZombieTotalNum; //当前波预计生成僵尸总数
+
 
             SetFlagPercent();
 
@@ -91,6 +91,7 @@ namespace PVZ.UI
         //根据当前波剩余僵尸数量/当前波总僵尸数量 得出当前波的进程，并更新UI
         void UpdateProgress()
         {
+
             LevelInfoItem levelInfoItem = levelManager.GetCurrentLevelInfoItem();
             int currentWaveID = levelManager.currentWaveID;
 
@@ -121,6 +122,7 @@ namespace PVZ.UI
         //当生成新僵尸事件回调
         void OnZombieNumChange(int numToChange)
         {
+            currentWaveZombieTotal = levelManager.currentWaveZombieTotalNum; //当前波预计生成僵尸总数
             currentWaveZombieSpawned += numToChange;
             UpdateProgress();
         }

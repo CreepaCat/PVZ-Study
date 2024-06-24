@@ -28,9 +28,16 @@ namespace PVZ.Managers
 
         public event Action SunNumChanged;
 
+        GameManager gameManager;
+
+        void Awake()
+        {
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
+
         void Update()
         {
-            // if()
+            if (gameManager.IsGameAlive == false) return;
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnInterval)
             {
